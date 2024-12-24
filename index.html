@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+    <input type="date" id="userage">
+    <button onclick="calculateAge()">Calculate</button>
+
+    <div id="SHOW"></div>
+</header>
+
+    <script>
+        function calculateAge() {
+            let userage = document.getElementById("userage").value;
+
+            if (!userage) {
+                document.getElementById("SHOW").innerHTML = "Please enter a valid date.";
+                return;
+            }
+
+            let birthDate = new Date(userage);
+            let currentDate = new Date();
+
+            let AGEYears = currentDate.getFullYear() - birthDate.getFullYear();
+            let AGEMonths = currentDate.getMonth() - birthDate.getMonth();
+            let AGEDays = currentDate.getDate() - birthDate.getDate();
+
+            if (AGEDays < 0) {
+                AGEMonths--;
+                AGEDays += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+            }
+
+            if (AGEMonths < 0) {
+                AGEYears--;
+                AGEMonths += 12;
+            }
+
+            let nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBirthday < currentDate) {
+                nextBirthday.setFullYear(currentDate.getFullYear() + 1);
+            }
+
+            let Diff = nextBirthday - currentDate;
+
+            let daysRemaining = Math.ceil(Diff / (1000 * 60 * 60 * 24));
+
+            let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let nextBirthdayDay = dayNames[nextBirthday.getDay()];
+            
+            document.getElementById("SHOW").innerHTML = `
+                Your AGE ${AGEYears} years, ${AGEMonths} months,${AGEDays} DAYS.<br>
+                Your next birthday- ${nextBirthday.toLocaleDateString()} (${nextBirthdayDay}).<br>
+                ${daysRemaining} DAYS remaine until your NEXT birthday.
+            `;
+        }
+    </script>
+
+    
+</body>
+</html>

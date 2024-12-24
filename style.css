@@ -1,0 +1,24 @@
+body{
+    background-color: darkturquoise;
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    font-weight:bold;
+
+}
+header{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+button{
+    border:1px solid;
+    color: blue;
+    background-color: cadetblue;
+    border-radius: 2px;
+}
+input{
+    border: 1px;
+    border-radius: 2px;
+    background-color: blue;
+}
